@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Child Dashboard</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            padding: 30px;
+        }
+        h1 {
+            color: #2e7d32;
+        }
+        .button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .activity-button {
+            background-color: #64b5f6;
+            color: white;
+        }
+        .alert-button {
+            background-color: #ef5350;
+            color: white;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #1b5e20;
+        }
+        .logout-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-link:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }} (Child)</h1>
+
+    <button class="button activity-button" onclick="sendActivity('Watching YouTube')">YouTube</button>
+    <button class="button activity-button" onclick="sendActivity('Using WhatsApp Web')">WhatsApp Web</button>
+    <button class="button alert-button" onclick="sendAlert()">Send Emergency Alert</button>
+
+    <div id="status" class="status">Status: Waiting for interaction...</div>
+
+    <a class="logout-link" href="{{ url_for('logout') }}">Logout</a>
+
+    <script>
+        const socket = io();
+        const parentName = prompt("Enter your parent's username:");
+
+        function sendActivity(activityName) {
+            socket.emit('activity', {
+                activity: `${parentName}'s child is now: ${activityName}`
+            });
+            document.getElementById('status').innerText = "Sent activity: " + activityName;
+        }
+
+        function sendAlert() {
+            socket.emit('send_alert', {
+                parent_name: parentName
+            });
+            document.getElementById('status').innerText = "Emergency alert sent!";
+        }
+    </script>
+</body>
+</html>

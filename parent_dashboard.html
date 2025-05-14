@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parent Dashboard</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f8ff;
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+        }
+        .info-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            font-size: 18px;
+        }
+        .alert {
+            background-color: #ffe6e6;
+            color: #b71c1c;
+            border: 1px solid #ef9a9a;
+        }
+        .logout-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #ff5252;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-link:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }} (Parent)</h1>
+
+    <div id="activity" class="info-box">No activity updates yet.</div>
+    <div id="alert" class="info-box alert">No alerts yet.</div>
+
+    <a class="logout-link" href="{{ url_for('logout') }}">Logout</a>
+
+    <script>
+        const socket = io();
+
+        socket.on('activity', function(data) {
+            document.getElementById('activity').innerText = data.activity;
+        });
+
+        socket.on('alert', function(data) {
+            document.getElementById('alert').innerText = data.alert;
+        });
+    </script>
+</body>
+</html>

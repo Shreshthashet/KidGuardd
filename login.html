@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KidGuard - Login</title>
+  <style>
+    body {
+      background: linear-gradient(to left, #ffecd2, #fcb69f);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .flash {
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .signup-link a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        margin: 10px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="parent">Parent</option>
+        <option value="child">Child</option>
+      </select>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="signup-link">
+      Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KidGuard - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-top: 20px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .content {
+      margin: auto;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      max-width: 90%;
+      margin: 0 auto 20px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .login-btn {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      background-color: rgba(0, 123, 255, 0.9);
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .login-btn:hover {
+      background-color: rgba(0, 123, 255, 1);
+    }
+
+    footer {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 2rem;
+      }
+
+      .content p {
+        font-size: 1rem;
+      }
+
+      .login-btn {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>KidGuard</header>
+
+  <div class="content">
+    <p>Protect your child’s digital world. Monitor screen time, detect unsafe content, and stay connected.</p>
+    <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+  </div>
+
+  <footer>&copy; 2025 KidGuard. All rights reserved.</footer>
+</body>
+</html>
